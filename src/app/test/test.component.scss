@@ -1,0 +1,16 @@
+.content-box {
+  background: var(--background-color-transparent);
+  width: 50vw;
+  height: 20vh;
+  margin: auto;
+  display: flex;
+  border-radius: 30px;
+  border: 2px black solid;
+  backdrop-filter: blur(10px);
+
+  .site-logo {
+    position: absolute;
+    transform: translateX(-50%) translateY(-35%);
+    left: 50%;
+  }
+}

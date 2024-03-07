@@ -1,0 +1,15 @@
+:root {
+    --primary-color: #ff7043;
+    --accent-color: #748067;
+    --background-color: #F1F5F2;
+    --background-color-transparent: #E0E2DB75;
+    --warn-color: #942911;
+}
+
+body.dark {
+    --primary: #ff7043;
+    --accent-color: #748067;
+    --background: #191716;
+    --background-transparent: #19171675;
+    --warn-color: #942911;
+}

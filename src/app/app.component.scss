@@ -1,0 +1,33 @@
+header {
+  position: relative;
+  height: 100px;
+  background-color: var(--background-color);
+  z-index: 1;
+
+  .site-logo {
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    bottom: -25px;
+  }
+}
+
+.left-bg,
+.right-bg {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  z-index: -1;
+}
+
+.left-bg {
+  left: 0;
+  background-image: url("/assets/images/background-ltr.png");
+}
+
+.right-bg {
+  right: 0;
+  background-image: url("/assets/images/background-rtl.png");
+}
