@@ -1,17 +1,3 @@
-header {
-  position: relative;
-  height: 100px;
-  background-color: var(--background-color);
-  z-index: 1;
-
-  .site-logo {
-    position: absolute;
-    transform: translateX(-50%);
-    left: 50%;
-    bottom: -25px;
-  }
-}
-
 .left-bg,
 .right-bg {
   position: absolute;
@@ -30,4 +16,8 @@ header {
 .right-bg {
   right: 0;
   // background-image: url("assets/images/background-rtl.png");
+}
+
+main {
+  margin-top: 25px;
 }

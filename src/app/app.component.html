@@ -1,24 +1,16 @@
-<header>
-  <a routerLink="">
-    <img
-      class="site-logo"
-      ngSrc="assets/images/basketstats_hq.png"
-      alt="basketstats-irt logo"
-      width="120"
-      height="120"
-      priority
-    />
-  </a>
-
-  <div class="container h-100 d-flex align-items-center">
-    <a mat-button routerLink="/teams">Rozpocznij</a>
-  </div>
-</header>
-<nav></nav>
+<p-toast></p-toast>
+<app-loader></app-loader>
+<app-nav-header></app-nav-header>
 <!-- <div class="left-bg">
 </div>
 <div class="right-bg">
 </div> -->
-<main>
+<main class="container">
   <router-outlet></router-outlet>
 </main>
+
+<footer>
+  <!-- <a href="https://www.flaticon.com/free-icons/tank-top" title="tank top icons"
+    >Tank top icons created by BabyCorn - Flaticon</a
+  > -->
+</footer>

@@ -1,0 +1,19 @@
+.preparation-container {
+  min-height: 55vh;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+
+  p-button:first-of-type {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  p-divider {
+    visibility: hidden;
+  }
+}

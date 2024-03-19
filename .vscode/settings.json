@@ -1,8 +1,9 @@
 {
   "editor.formatOnSave": true,
+  "editor.linkedEditing": true,
   "[typescript]": {
     "editor.codeActionsOnSave": {
-      "source.organizeImports": true
+      "source.organizeImports": "explicit"
     }
   }
 }

@@ -1,0 +1,81 @@
+<div [formGroup]="form" class="team-definition-box">
+  <div class="team-headline">
+    <img
+      class="team-logo"
+      src="https://picsum.photos/120/120"
+      width="120"
+      height="120"
+      alt="Team logo"
+    />
+    <div class="team-name">
+      <div>
+        <ng-container *ngIf="editName; else readonlyName">
+          <p-floatLabel>
+            <input
+              [id]="'teamName-' + teamId"
+              class="name-input"
+              pInputText
+              type="text"
+              formControlName="name"
+              (keyup.enter)="confirmTeamName()"
+            />
+            <label [for]="'teamName-' + teamId">Nazwa drużyny</label>
+          </p-floatLabel>
+          <p-button
+            icon="pi pi-check"
+            [rounded]="true"
+            (onClick)="confirmTeamName()"
+          ></p-button>
+        </ng-container>
+        <ng-template #readonlyName>
+          <h1>{{ teamNameControl.value }}</h1>
+          <p-button
+            icon="pi pi-pencil"
+            [rounded]="true"
+            [text]="true"
+            (onClick)="editName = true"
+          ></p-button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <div class="players-list" formArrayName="players">
+    <div
+      *ngFor="let playerForm of teamPlayersControls; let index = index"
+      class="player mb-4"
+      [formGroup]="playerForm"
+    >
+      <div class="player-number">
+        <span>{{ index + 1 }}</span>
+      </div>
+      <p-floatLabel>
+        <input
+          [id]="'playerName-' + teamId + '-' + index"
+          type="text"
+          pInputText
+          formControlName="name"
+        />
+        <label [for]="'playerName-' + teamId + '-' + index"
+          >Zawodnik #{{ index + 1 }}</label
+        >
+      </p-floatLabel>
+      <p-button
+        *ngIf="teamPlayersArray.length > 3"
+        class="ms-1"
+        icon="pi pi-trash"
+        [rounded]="true"
+        [text]="true"
+        severity="danger"
+        (onClick)="removePlayer(index)"
+      ></p-button>
+    </div>
+    <p-button
+      *ngIf="teamPlayersArray.length < 12"
+      icon="pi pi-plus"
+      [rounded]="true"
+      pTooltip="Dodaj zawodnika"
+      (click)="addPlayer()"
+    ></p-button>
+  </div>
+</div>

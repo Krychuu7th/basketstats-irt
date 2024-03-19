@@ -1,0 +1,59 @@
+<p-steps
+  [model]="items"
+  [readonly]="true"
+  [activeIndex]="activeIndex"
+  (activeIndexChange)="onActiveIndexChange($event)"
+></p-steps>
+<div class="preparation-container">
+  @switch (activeIndex) { @case (0) {
+  <h1 class="text-center mt-3">Składy</h1>
+  <div class="columns--two">
+    <div class="d-flex justify-content-center">
+      <app-team-definition [form]="teamAForm"></app-team-definition>
+    </div>
+    <p-divider layout="vertical"></p-divider>
+    <div class="d-flex justify-content-center">
+      <app-team-definition [form]="teamBForm"></app-team-definition>
+    </div>
+  </div>
+  } @case (1) {
+  <h1 class="text-center mt-3">Ustawienie</h1>
+  <div class="columns--two">
+    <div class="d-flex justify-content-center">
+      <app-team-reorder [team]="teamA"></app-team-reorder>
+    </div>
+    <p-divider layout="vertical"></p-divider>
+    <div class="d-flex justify-content-center">
+      <app-team-reorder [team]="teamB"></app-team-reorder>
+    </div>
+  </div>
+  } @case (2) { 2 } }
+</div>
+
+<div class="navigation-buttons">
+  <p-button
+    *ngIf="activeIndex > 0"
+    icon="pi pi-arrow-left"
+    [outlined]="true"
+    [rounded]="true"
+    iconPos="left"
+    (onClick)="previousStep()"
+  ></p-button>
+  <p-button
+    *ngIf="activeIndex < 2"
+    label="Dalej"
+    icon="pi pi-arrow-right"
+    [rounded]="true"
+    iconPos="right"
+    (onClick)="nextStep()"
+  ></p-button>
+  <p-button
+    *ngIf="activeIndex == 2"
+    label="Potwierdź"
+    icon="pi pi-check"
+    [rounded]="true"
+    iconPos="left"
+    severity="success"
+    (onClick)="saveMatchConfiguration()"
+  ></p-button>
+</div>
