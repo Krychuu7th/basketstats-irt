@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './team-definition.component.html',
   styleUrl: './team-definition.component.scss'
 })
-export class TeamDefinitionComponent {
+export class TeamDefinitionComponent implements OnInit {
 
   @Input({ required: true }) form!: FormGroup;
 
@@ -31,6 +31,12 @@ export class TeamDefinitionComponent {
       }
     },
   ];
+
+  ngOnInit(): void {
+    if (this.teamNameControl.value) {
+      this.editName = false;
+    }
+  }
 
   confirmTeamName(): void {
     this.teamNameControl.markAsDirty();

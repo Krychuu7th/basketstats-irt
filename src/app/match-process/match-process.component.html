@@ -1,0 +1,79 @@
+<div class="general-box container">
+  <div *ngIf="match.teamA as teamA" class="team-box">
+    <img
+      class="team-logo"
+      src="https://picsum.photos/80/80"
+      width="80"
+      height="80"
+      alt="Team {{ teamA.name }} logo"
+    />
+    <div class="team-name">
+      <h2 class="m-0">{{ teamA.name }}</h2>
+    </div>
+  </div>
+  <div class="score-box">
+    <span class="score left">199</span>
+    <span>:</span>
+    <span class="score right">99</span>
+  </div>
+  <div *ngIf="match.teamB as teamB" class="team-box reverse">
+    <img
+      class="team-logo"
+      src="https://picsum.photos/80/80"
+      width="80"
+      height="80"
+      alt="Team {{ teamB.name }} logo"
+    />
+    <div class="team-name">
+      <h2 class="m-0">{{ teamB.name }}</h2>
+    </div>
+  </div>
+</div>
+<div class="court-panel-box">
+  <app-on-court-players [players]="match.teamA.players!"></app-on-court-players>
+  <div class="court-view-box" (click)="courtClicked($event)">
+    <img
+      id="fullCourt"
+      class="full-court"
+      src="assets/images/court_panel_full.png"
+      alt="Court full view"
+      height="727"
+      priority
+    />
+
+    <img
+      id="leftSide"
+      class="left-court-side"
+      src="assets/images/left_inner_court.png"
+      alt="Court left inner side"
+      height="568"
+      priority
+    />
+
+    <img
+      id="rightSide"
+      class="right-court-side"
+      src="assets/images/right_inner_court.png"
+      alt="Court right inner side"
+      height="568"
+      priority
+    />
+    <!-- TEST -->
+    <i
+      class="pi pi-times-circle stat-point"
+      [ngStyle]="{ 'left.%': clickedX, 'top.%': clickedY }"
+    ></i>
+    <!--  -->
+  </div>
+  <app-on-court-players
+    class="reverse"
+    [players]="match.teamB.players!"
+  ></app-on-court-players>
+</div>
+<!-- TEST -->
+<div>
+  <span>X: {{ clickedX }}%, Y: {{ clickedY }}%</span><br />
+  <span>2PT: {{ fg2 }}, 3PT: {{ fg3 }}</span>
+</div>
+<!--  -->
+<div class="summary-table container">tabelka</div>

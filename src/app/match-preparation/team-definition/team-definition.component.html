@@ -5,7 +5,7 @@
       src="https://picsum.photos/120/120"
       width="120"
       height="120"
-      alt="Team logo"
+      alt="Team {{ teamNameControl.value }} logo"
     />
     <div class="team-name">
       <div>
@@ -47,7 +47,11 @@
       [formGroup]="playerForm"
     >
       <div class="player-number">
-        <span>{{ index + 1 }}</span>
+        <!-- <span>{{ index + 1 }}</span> -->
+        <i
+          class="pi"
+          [ngClass]="{ 'pi-circle': index <= 4, 'pi-plus-circle': index > 4 }"
+        ></i>
       </div>
       <p-floatLabel>
         <input

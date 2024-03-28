@@ -1,43 +1,39 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { NgOptimizedImage } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
-import { DividerModule } from 'primeng/divider';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { InputTextModule } from 'primeng/inputtext';
+
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
-import { SpeedDialModule } from 'primeng/speeddial';
-import { StepsModule } from 'primeng/steps';
+
+import { ROUTES } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, buildRoutes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
-import { MatchPreparationComponent } from './match-preparation/match-preparation.component';
-import { TeamDefinitionComponent } from './match-preparation/team-definition/team-definition.component';
-import { TeamReorderComponent } from './match-preparation/team-reorder/team-reorder.component';
+import { LoaderComponent } from './loader/loader.component';
 import { NavHeaderComponent } from './nav-header/nav-header.component';
+import { ThemeSwitchComponent } from './nav-header/theme-switch/theme-switch.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AppRoutes } from './providers/routes';
 import { SharedModule } from './shared/shared.module';
 import { TestModule } from './test/test.module';
-import { LoaderComponent } from './loader/loader.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
-    MatchPreparationComponent,
     NotFoundComponent,
     NavHeaderComponent,
-    TeamDefinitionComponent,
-    TeamReorderComponent,
-    LoaderComponent
+    LoaderComponent,
+    ThemeSwitchComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,22 +42,39 @@ import { LoaderComponent } from './loader/loader.component';
     SharedModule,
     TestModule,
     NgOptimizedImage,
-    InputTextModule,
-    FloatLabelModule,
-    ReactiveFormsModule,
+    // InputTextModule,
+    // FloatLabelModule,
+    // ReactiveFormsModule,
     ButtonModule,
-    StepsModule,
+    // StepsModule,
     ToastModule,
-    DividerModule,
-    SpeedDialModule,
-    DragDropModule,
+
+    // SpeedDialModule,
+    // DragDropModule,
     TooltipModule,
     ProgressSpinnerModule,
-
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     provideAnimationsAsync(),
-    MessageService
+    MessageService,
+    {
+      provide: AppRoutes,
+      useClass: AppRoutes
+    },
+    {
+      provide: ROUTES,
+      useFactory: (appRoutes: AppRoutes) => {
+        return buildRoutes(appRoutes);
+      },
+      multi: true,
+      deps: [AppRoutes]
+    },
   ],
   bootstrap: [AppComponent]
 })

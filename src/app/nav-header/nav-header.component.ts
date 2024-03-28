@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AppRoutes } from '../providers/routes';
 
 @Component({
   selector: 'app-nav-header',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class NavHeaderComponent {
 
+  constructor(
+    public appRoutes: AppRoutes
+  ) { }
 }

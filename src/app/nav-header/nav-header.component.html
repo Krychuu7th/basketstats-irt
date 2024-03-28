@@ -1,5 +1,5 @@
 <header>
-  <a routerLink="">
+  <a [routerLink]="appRoutes.EMPTY">
     <img
       class="site-logo"
       ngSrc="assets/images/basketstats_hq.png"
@@ -10,10 +10,15 @@
     />
   </a>
   <nav class="container h-100 d-flex align-items-center">
-    <a
-      routerLink="/match/prepare"
-      class="p-button p-button-text text-decoration-none fw-bold"
-      >Rozpocznij</a
-    >
+    <div class="w-50 d-flex align-items-center">
+      <a
+        [routerLink]="[appRoutes.MATCH, appRoutes.PREPARE]"
+        class="p-button p-button-text text-decoration-none fw-bold"
+        >Rozpocznij</a
+      >
+    </div>
+    <div class="w-50 d-flex align-items-center justify-content-end">
+      <app-theme-switch></app-theme-switch>
+    </div>
   </nav>
 </header>

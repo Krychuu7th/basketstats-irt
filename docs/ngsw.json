@@ -1,0 +1,147 @@
+{
+  "configVersion": 1,
+  "timestamp": 1711626736198,
+  "index": "/basketstats-irt/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/basketstats-irt/chunk-4YS2ADNB.js",
+        "/basketstats-irt/chunk-DEFXIDR7.js",
+        "/basketstats-irt/chunk-E5D5AY4I.js",
+        "/basketstats-irt/chunk-HW56LGDT.js",
+        "/basketstats-irt/chunk-KABFTW62.js",
+        "/basketstats-irt/chunk-KEVLUD7D.js",
+        "/basketstats-irt/chunk-MNIMJUEA.js",
+        "/basketstats-irt/chunk-TVHJ2YAM.js",
+        "/basketstats-irt/day-theme.css",
+        "/basketstats-irt/favicon.ico",
+        "/basketstats-irt/index.html",
+        "/basketstats-irt/main-B43TZOTG.js",
+        "/basketstats-irt/manifest.webmanifest",
+        "/basketstats-irt/night-theme.css",
+        "/basketstats-irt/polyfills-RT5I6R6G.js",
+        "/basketstats-irt/scripts-EEEIPNC3.js",
+        "/basketstats-irt/styles-PYIYA4BI.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/basketstats-irt/assets/icons/icon-128x128.png",
+        "/basketstats-irt/assets/icons/icon-144x144.png",
+        "/basketstats-irt/assets/icons/icon-152x152.png",
+        "/basketstats-irt/assets/icons/icon-192x192.png",
+        "/basketstats-irt/assets/icons/icon-384x384.png",
+        "/basketstats-irt/assets/icons/icon-512x512.png",
+        "/basketstats-irt/assets/icons/icon-72x72.png",
+        "/basketstats-irt/assets/icons/icon-96x96.png",
+        "/basketstats-irt/assets/images/background-ltr-dbl.png",
+        "/basketstats-irt/assets/images/background-ltr.png",
+        "/basketstats-irt/assets/images/background-pattern2.png",
+        "/basketstats-irt/assets/images/background-rtl-dbl.png",
+        "/basketstats-irt/assets/images/background-rtl.png",
+        "/basketstats-irt/assets/images/ball_on_line.jpg",
+        "/basketstats-irt/assets/images/ball_on_line2.jpg",
+        "/basketstats-irt/assets/images/basketstats_hq.png",
+        "/basketstats-irt/assets/images/court_panel_full.png",
+        "/basketstats-irt/assets/images/court_panel_full_0.png",
+        "/basketstats-irt/assets/images/left_inner_court.png",
+        "/basketstats-irt/assets/images/left_inner_court_0.png",
+        "/basketstats-irt/assets/images/right_inner_court.png",
+        "/basketstats-irt/assets/images/right_inner_court_0.png",
+        "/basketstats-irt/assets/images/where.png",
+        "/basketstats-irt/media/Inter-italic.var-SWFAXF2C.woff2",
+        "/basketstats-irt/media/Inter-roman.var-WIJJYAE4.woff2",
+        "/basketstats-irt/media/color-3LUHUBGQ.png",
+        "/basketstats-irt/media/hue-RMMBQOAC.png",
+        "/basketstats-irt/media/primeicons-7C46RJHE.woff",
+        "/basketstats-irt/media/primeicons-AEJFRHCW.ttf",
+        "/basketstats-irt/media/primeicons-SQ5LETCD.svg",
+        "/basketstats-irt/media/primeicons-XI7ZC3P3.woff2"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/basketstats-irt/assets/icons/icon-128x128.png": "db3624542d8f66272cb3d24fb9a0500a81754f47",
+    "/basketstats-irt/assets/icons/icon-144x144.png": "a3c79cea43a6d6e387223a52fe2ecf6e4277e81c",
+    "/basketstats-irt/assets/icons/icon-152x152.png": "098d9411860b7b1c294e3479198eedd5eeb225d1",
+    "/basketstats-irt/assets/icons/icon-192x192.png": "6bb92b6dac146f823c90ac23f26bc954044f9ed3",
+    "/basketstats-irt/assets/icons/icon-384x384.png": "14e656332929d958e1e7290303a82df78007a45f",
+    "/basketstats-irt/assets/icons/icon-512x512.png": "c1232d8526d97fcf5ecd79af6345a7f10f095c89",
+    "/basketstats-irt/assets/icons/icon-72x72.png": "4c7bca5988f0d0e4dee695166165163fdb65315e",
+    "/basketstats-irt/assets/icons/icon-96x96.png": "3c79f0b147d5d143bb12b4f7baacd2200e451a29",
+    "/basketstats-irt/assets/images/background-ltr-dbl.png": "56dfd292b1006b462f2a4657cf9f600659cecaf8",
+    "/basketstats-irt/assets/images/background-ltr.png": "f15447e20bc5fe3f14817016f8b1347e57dfcbe7",
+    "/basketstats-irt/assets/images/background-pattern2.png": "68d79ff38bc68a945323c91c71885415886a4680",
+    "/basketstats-irt/assets/images/background-rtl-dbl.png": "76d8d15d0d347bb328da34b07412e86782378e5f",
+    "/basketstats-irt/assets/images/background-rtl.png": "4739bbdce2017fce1ecab38845a594d82bfb89d5",
+    "/basketstats-irt/assets/images/ball_on_line.jpg": "21f928a8fbbc5899d594e00b281b0dbefa2d2171",
+    "/basketstats-irt/assets/images/ball_on_line2.jpg": "33b94e7dc3c2f9c1f6e218dc397cdf2160d568cd",
+    "/basketstats-irt/assets/images/basketstats_hq.png": "5c92900b27c96489c62b105445144259a5c959f7",
+    "/basketstats-irt/assets/images/court_panel_full.png": "f5f31f6db6168b23ea466c9655221b2cb3ff01c9",
+    "/basketstats-irt/assets/images/court_panel_full_0.png": "fdae48c1c2ab1e7683ec6520bbc8b13e4c1a9796",
+    "/basketstats-irt/assets/images/left_inner_court.png": "3222c79f386cce17e15b42dae3d5256212de6a3b",
+    "/basketstats-irt/assets/images/left_inner_court_0.png": "5014e4fe5df25220e23cc43a952942f2415d4bef",
+    "/basketstats-irt/assets/images/right_inner_court.png": "7d46aa8f8b08946985b4e2fd97a3a3ed6c8dfc38",
+    "/basketstats-irt/assets/images/right_inner_court_0.png": "d771b2e02c0a5649a27f5799cfcb366a4ccf7962",
+    "/basketstats-irt/assets/images/where.png": "a6ebf241c55e139d92af2c56c440db5f6ca29632",
+    "/basketstats-irt/chunk-4YS2ADNB.js": "8878d660c59028134a19e47908ec700218cb548e",
+    "/basketstats-irt/chunk-DEFXIDR7.js": "6890575443005f13189d503bde14049c6565f28a",
+    "/basketstats-irt/chunk-E5D5AY4I.js": "bdcc3ccab122eb0737232f0692538328d5de7035",
+    "/basketstats-irt/chunk-HW56LGDT.js": "3fc5063d6e2523dca344b38b56dc12d3e91e914d",
+    "/basketstats-irt/chunk-KABFTW62.js": "26f81f4e4b372cbb68ac2e58b853d6e2bb0387d1",
+    "/basketstats-irt/chunk-KEVLUD7D.js": "6c4b830c31f759d166addc18eb2c6153f0b88829",
+    "/basketstats-irt/chunk-MNIMJUEA.js": "913691029f059a43a1570c199edb31931b4e1305",
+    "/basketstats-irt/chunk-TVHJ2YAM.js": "aa28cb501887de2e9ca0a48356f54ac36fdfbc79",
+    "/basketstats-irt/day-theme.css": "f3bd6f5751e7be99fe000206caba16a440a184b3",
+    "/basketstats-irt/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/basketstats-irt/index.html": "c52397e270255306249fef28a8798d8bbf486574",
+    "/basketstats-irt/main-B43TZOTG.js": "5c1fd85fca896108684d0c1f91c8fb29d05bfced",
+    "/basketstats-irt/manifest.webmanifest": "87164bc51f261ef7a6bb88f97d723f72d236f3f9",
+    "/basketstats-irt/media/Inter-italic.var-SWFAXF2C.woff2": "6f20a046917bf86d4b6cc29c4e2515bd64d2cb9b",
+    "/basketstats-irt/media/Inter-roman.var-WIJJYAE4.woff2": "7a2602d2ebb08ce895e33addb6fe595f1029431e",
+    "/basketstats-irt/media/color-3LUHUBGQ.png": "ff4c4bcb2207891b292f544edb4da9d2df5d45cf",
+    "/basketstats-irt/media/hue-RMMBQOAC.png": "f81ae627637a684614aa726e206c73ce099a01fd",
+    "/basketstats-irt/media/primeicons-7C46RJHE.woff": "b1648b50be13350fde8b5d9a6fe78354ddcc43e4",
+    "/basketstats-irt/media/primeicons-AEJFRHCW.ttf": "ceeb46d594fde5cc507cdf8b70e38e78fe47653c",
+    "/basketstats-irt/media/primeicons-SQ5LETCD.svg": "d3332a45242b8f6edbf3f3c7176a280e7edcd961",
+    "/basketstats-irt/media/primeicons-XI7ZC3P3.woff2": "55a4b2a5f02e362405d8d874903af0b5f6a6c15d",
+    "/basketstats-irt/night-theme.css": "c607c98303618d2cd58d4ef6e63f77058c1ce01b",
+    "/basketstats-irt/polyfills-RT5I6R6G.js": "fe9f024576f21ff6314cf8f8332cde58b9a12416",
+    "/basketstats-irt/scripts-EEEIPNC3.js": "2318ded8c885787a1645385a82c1ca883c359034",
+    "/basketstats-irt/styles-PYIYA4BI.css": "939312da9cefb973d2d0d0b097df9725f3415453"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

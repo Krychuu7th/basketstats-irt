@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
+import { LoaderService } from '../loader/loader.service';
 import { Team } from '../models/match.models';
+import { AppRoutes } from '../providers/routes';
 import { MatchPreparationService } from './match-preparation.service';
 
 @Component({
@@ -22,11 +24,16 @@ export class MatchPreparationComponent implements OnInit {
     private matchPreparationService: MatchPreparationService,
     private messageService: MessageService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private loaderService: LoaderService,
+    private appRoutes: AppRoutes
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ match }) => {
-      console.log(match)
+      this.matchPreparationService.addBenchPlayerForms(this.teamAForm, match.teamA.players.length);
+      this.matchPreparationService.addBenchPlayerForms(this.teamBForm, match.teamB.players.length);
+
       if (match?.teamA && match?.teamB) {
         this.teamAForm.patchValue(match.teamA);
         this.teamBForm.patchValue(match.teamB);
@@ -80,7 +87,12 @@ export class MatchPreparationComponent implements OnInit {
   }
 
   saveMatchConfiguration(): void {
-    this.matchPreparationService.saveMatchConfiguration({ teamA: this.teamA, teamB: this.teamB });
+    this.loaderService.startLoading();
+    this.matchPreparationService.saveMatchConfiguration({ teamA: this.teamA, teamB: this.teamB })
+      .then(() => {
+        this.loaderService.stopLoading();
+        this.router.navigate([this.appRoutes.MATCH, this.appRoutes.PROCESS]);
+      });
   }
 
   get teamA(): Team {

@@ -1,5 +1,5 @@
 <div class="team-reorder-box">
-  <div class="starting-five"><span>Piersza piątka</span></div>
+  <div class="starting-five"><span>Pierwsza piątka</span></div>
   <div cdkDropList class="player-list" (cdkDropListDropped)="drop($event)">
     @for (player of players; track player; let index = $index) {
     <div class="player-box" [ngClass]="{ 'mb-3': index === 4 }" cdkDrag>

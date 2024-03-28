@@ -1,0 +1,27 @@
+<div class="court-players-box">
+  @for (player of players; let index = $index; track index) {
+  <div class="{{ index < 5 ? 'court-player' : 'court-player bench-player' }}">
+    <div class="player-avatar">
+      <div class="shadow-box"></div>
+      <img
+        src="https://picsum.photos/50/50"
+        width="50"
+        height="50"
+        alt="Player {{ player.id }} avatar"
+      />
+    </div>
+
+    <div class="player-general">
+      <div class="shadow-box"></div>
+      <div>
+        <div>#{{ index + 1 }} | {{ player.name }}</div>
+        <div class="fouls">
+          @for (i of 'iiiii'; let index = $index; track index) {
+          <div class="foul {{ index < 3 ? 'fill' : 'empty' }}"></div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>
