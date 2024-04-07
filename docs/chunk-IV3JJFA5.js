@@ -1,0 +1,1 @@
+import"./chunk-SPZM3GNH.js";import"./chunk-IX6G3U3V.js";import{F as e}from"./chunk-TOLDVNLI.js";import{Z as r,ia as i,tc as m}from"./chunk-YXDHR4WX.js";var y=(()=>{let o=class o{};o.\u0275fac=function(n){return new(n||o)},o.\u0275mod=i({type:o}),o.\u0275inj=r({imports:[m,e]});let t=o;return t})();export{y as MatchProcessModule};
