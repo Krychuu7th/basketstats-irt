@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { db } from '../database/database';
-import { Player, StandardMatch, Team } from '../models/match.models';
+import { StandardMatch, Team } from '../models/match.models';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +26,10 @@ export class MatchPreparationService {
       teamId = await this.addTeam(team);
     }
 
+    // team.players?.forEach(player => player.teamId = teamId);
+    team.players = team.players?.map(player => player.id ? ({ ...player, teamId }) : ({ name: player.name, teamId }));
     if (team.players) {
-      await db.players.bulkPut(team.players?.map((player: Player) => ({ ...player, teamId })));
+      await db.players.bulkPut(team.players);
     }
   }
 

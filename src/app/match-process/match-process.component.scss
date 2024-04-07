@@ -1,8 +1,6 @@
-$inner-court-border-radius: 284px;
-
 .general-box {
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 
   .team-box {
     display: flex;
@@ -11,10 +9,27 @@ $inner-court-border-radius: 284px;
 
     &.reverse {
       flex-direction: row-reverse;
+
+      .shadow-box {
+        left: unset;
+        right: -4px;
+      }
     }
 
-    .team-logo {
-      border-radius: 10px;
+    .team-logo-box {
+      position: relative;
+
+      .team-logo {
+        border-radius: 50%;
+        position: relative;
+        z-index: 1;
+      }
+
+      .shadow-box {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
     }
 
     .team-name {
@@ -47,50 +62,10 @@ $inner-court-border-radius: 284px;
     }
   }
 }
+
 .court-panel-box {
   display: flex;
   justify-content: center;
-
-  .court-view-box {
-    position: relative;
-    max-width: var(--court-panel-box-xxl-width);
-    max-height: var(--court-panel-box-xxl-height);
-    cursor: crosshair;
-    -webkit-box-shadow: 0px 0px 8px 3px var(--shadow-color);
-    -moz-box-shadow: 0px 0px 8px 3px var(--shadow-color);
-    box-shadow: 0px 0px 8px 3px var(--shadow-color);
-
-    .full-court,
-    .left-court-side,
-    .right-court-side {
-      filter: brightness(var(--brightness));
-    }
-
-    .left-court-side {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(calc(-50% - 1px));
-      border-top-right-radius: $inner-court-border-radius;
-      border-bottom-right-radius: $inner-court-border-radius;
-    }
-
-    .right-court-side {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(calc(-50% - 1px));
-      border-top-left-radius: $inner-court-border-radius;
-      border-bottom-left-radius: $inner-court-border-radius;
-    }
-
-    .stat-point {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      font-size: 2rem;
-      color: red;
-    }
-  }
 }
 
 @media screen and (max-width: 1400px) {

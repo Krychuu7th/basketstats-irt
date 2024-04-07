@@ -16,23 +16,26 @@
 
 body[theme-mode="day"] {
   --primary-color: #f57710;
+  --primary-color-pale: #ffe0c7;
   --accent-color: #748067;
   --background-color: #ffffff;
   --header-background-color: #f1f5f2;
   --box-background-color: #f1f5f2;
   --box-border-color: #b8bdb9;
   --background-color-transparent: #e0e2db75;
-  --warn-color: #942911;
+  --warn-color: #a1341c;
   --text-color: #000000;
   --input-background: #ffffff;
   --input-border-color: #cccccc;
   --shadow-color: #bdbdbd;
   --brightness: 1;
   --shadow-box-color: #748067;
+  --success-color: #7fb685;
 }
 
 body[theme-mode="night"] {
   --primary-color: #f57710;
+  --primary-color-pale: #ffe0c7;
   --accent-color: #748067;
   --background-color: #121a2b;
   --header-background-color: #0c111c;
@@ -46,4 +49,5 @@ body[theme-mode="night"] {
   --shadow-color: #0a0c10;
   --brightness: 0.8;
   --shadow-box-color: #161814;
+  --success-color: #7fb685;
 }

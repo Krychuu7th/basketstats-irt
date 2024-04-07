@@ -1,0 +1,55 @@
+<div
+  class="court-view-box"
+  (mousedown)="courtClicked($event)"
+  (mouseup)="resetCourtSelection($event)"
+>
+  <img
+    id="fullCourt"
+    class="full-court"
+    src="assets/images/court_panel_full.png"
+    alt="Court full view"
+    height="727"
+    priority
+  />
+
+  <img
+    id="leftSide"
+    class="left-court-side"
+    src="assets/images/left_inner_court.png"
+    alt="Court left inner side"
+    height="568"
+    priority
+  />
+
+  <img
+    id="rightSide"
+    class="right-court-side"
+    src="assets/images/right_inner_court.png"
+    alt="Court right inner side"
+    height="568"
+    priority
+  />
+  <!-- TEST -->
+  <i
+    *ngIf="clickedX && clickedY"
+    class="pi pi-times-circle stat-point"
+    [ngStyle]="{ 'left.%': clickedX, 'top.%': clickedY }"
+  ></i>
+  <!--  -->
+  <app-operation-dial
+    [hidden]="!clickedX || !clickedY"
+    class="position-absolute"
+    [ngStyle]="{ 'left.%': clickedX, 'top.%': clickedY }"
+    [operations]="operations"
+  ></app-operation-dial>
+  <div *ngIf="actionMessage" class="stat-message">
+    <span>{{ actionMessage }}</span>
+  </div>
+</div>
+<!-- TEST -->
+<!-- <div>
+  <span>X: {{ clickedX }}%, Y: {{ clickedY }}%</span><br />
+  <span>selectedX: {{ selectedX }}%, selectedY: {{ selectedY }}%</span><br />
+  <span>Shot value: {{ shotValue }}</span>
+</div> -->
+<!--  -->
