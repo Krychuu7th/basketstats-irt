@@ -7,11 +7,11 @@ import { NgOptimizedImage } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MessageService } from 'primeng/api';
-import { ButtonModule } from 'primeng/button';
 
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 import { ROUTES } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { AppRoutingModule, buildRoutes } from './app-routing.module';
@@ -24,7 +24,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutes } from './providers/routes';
 import { SharedModule } from './shared/shared.module';
 import { TestModule } from './test/test.module';
-import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -45,7 +44,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     // InputTextModule,
     // FloatLabelModule,
     // ReactiveFormsModule,
-    ButtonModule,
+
     // StepsModule,
     ToastModule,
 

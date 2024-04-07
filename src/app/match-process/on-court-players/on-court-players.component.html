@@ -1,26 +1,34 @@
 <div class="court-players-box">
   @for (player of players; let index = $index; track index) {
-  <div class="{{ index < 5 ? 'court-player' : 'court-player bench-player' }}">
+  <div
+    class="{{ index < 5 ? 'court-player' : 'court-player bench-player' }}"
+    [ngClass]="{
+      selection: needPlayerSelection && !selectedPlayerId,
+      selected: player.id === selectedPlayerId
+    }"
+    (click)="selectPlayer($event, player)"
+  >
     <div class="player-avatar">
       <div class="shadow-box"></div>
       <img
-        src="https://picsum.photos/50/50"
-        width="50"
-        height="50"
+        src="https://picsum.photos/55/55"
+        width="55"
+        height="55"
         alt="Player {{ player.id }} avatar"
       />
     </div>
 
     <div class="player-general">
       <div class="shadow-box"></div>
-      <div>
-        <div>#{{ index + 1 }} | {{ player.name }}</div>
+      <div class="player-name-box">
+        <div class="player-name">#{{ index + 1 }} | {{ player.name }}</div>
         <div class="fouls">
           @for (i of 'iiiii'; let index = $index; track index) {
           <div class="foul {{ index < 3 ? 'fill' : 'empty' }}"></div>
           }
         </div>
       </div>
+      <!-- <app-operation-dial [operations]="operations"></app-operation-dial> -->
     </div>
   </div>
   }

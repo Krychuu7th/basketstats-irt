@@ -1,0 +1,17 @@
+.operations-box {
+  position: relative;
+  z-index: 1;
+  transform: translate(-4px, -4px);
+
+  div {
+    margin: 0 4px;
+  }
+
+  .operations-background {
+    width: 224px;
+    height: 224px;
+    transform: translate(-112px, -108px);
+    border: 60px solid var(--background-color-transparent);
+    border-radius: 50%;
+  }
+}

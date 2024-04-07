@@ -67,13 +67,10 @@ body {
 }
 
 .shadow-box {
-  width: 50px;
-  height: 50px;
-  background-color: var(--shadow-box-color);
   position: absolute;
-  top: 5px;
-  left: -5px;
-  border-radius: 12px;
+  background-color: var(--shadow-box-color);
+  top: 4px;
+  left: -4px;
   -webkit-box-shadow: 0px 0px 8px 3px var(--shadow-color);
   -moz-box-shadow: 0px 0px 8px 3px var(--shadow-color);
   box-shadow: 0px 0px 8px 3px var(--shadow-color);

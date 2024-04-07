@@ -31,12 +31,14 @@ export class MatchPreparationComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ match }) => {
-      this.matchPreparationService.addBenchPlayerForms(this.teamAForm, match.teamA.players.length);
-      this.matchPreparationService.addBenchPlayerForms(this.teamBForm, match.teamB.players.length);
+      if (match) {
+        this.matchPreparationService.addBenchPlayerForms(this.teamAForm, match.teamA.players.length);
+        this.matchPreparationService.addBenchPlayerForms(this.teamBForm, match.teamB.players.length);
 
-      if (match?.teamA && match?.teamB) {
-        this.teamAForm.patchValue(match.teamA);
-        this.teamBForm.patchValue(match.teamB);
+        if (match.teamA && match.teamB) {
+          this.teamAForm.patchValue(match.teamA);
+          this.teamBForm.patchValue(match.teamB);
+        }
       }
     });
 

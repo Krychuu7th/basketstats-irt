@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
-import { TableName } from '../enums/database-enums';
+import { TableName } from '../enums/database.enums';
 import { db } from './database';
 
 @Injectable({
