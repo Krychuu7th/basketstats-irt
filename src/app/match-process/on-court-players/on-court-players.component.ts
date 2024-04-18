@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Player } from '../../models/match.models';
+import { ActionState, Player } from '../../models/match.models';
+import { MatchProcessService } from '../match-process.service';
 
 @Component({
   selector: 'app-on-court-players',
@@ -12,33 +13,30 @@ export class OnCourtPlayersComponent implements OnInit {
 
   @Input({ required: true }) players!: Player[];
 
-  @Input() needPlayerSelection: boolean = false;
-
-  @Output() selectedPlayer = new EventEmitter<Player>();
-
   @ViewChildren(OverlayPanel) playerStatPanels!: QueryList<OverlayPanel>;
 
-  selectedPlayerId!: number;
+  needPlayerSelection: boolean = false;
+  selectedPlayerId: number | undefined;
 
   constructor(
+    private matchProcessService: MatchProcessService,
     public messageService: MessageService,
   ) { }
 
   ngOnInit(): void {
-
+    this.matchProcessService.$actionState.subscribe((state: ActionState | null) => {
+      console.log(state?.needPlayerSelection);
+      this.needPlayerSelection = !!state?.needPlayerSelection;
+      if (this.needPlayerSelection) {
+        this.selectedPlayerId = undefined;
+      }
+    });
   }
 
   selectPlayer(event: any, player: Player): void {
     if (this.needPlayerSelection) {
       this.selectedPlayerId = player?.id!;
-      this.selectedPlayer.emit(player);
+      this.matchProcessService.nextActionStep(player);
     }
-
-    // if (this.needPlayerSelection) {
-    //   this.selectedPlayer.emit(this.statSelectorPlayerId);
-    // } else {
-    //   const panel = this.playerStatPanels.find(panel => panel.el.nativeElement.id === 'statSelect' + playerId);
-    //   panel?.show(null, event.target);
-    // }
   }
 }

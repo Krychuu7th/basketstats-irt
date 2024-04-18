@@ -30,7 +30,9 @@ body[theme-mode="day"] {
   --shadow-color: #bdbdbd;
   --brightness: 1;
   --shadow-box-color: #748067;
-  --success-color: #7fb685;
+  --success-color: #4cb659;
+  --error-color: #f73535;
+  --white-color: #f1f5f2;
 }
 
 body[theme-mode="night"] {
@@ -49,5 +51,7 @@ body[theme-mode="night"] {
   --shadow-color: #0a0c10;
   --brightness: 0.8;
   --shadow-box-color: #161814;
-  --success-color: #7fb685;
+  --success-color: #4cb659;
+  --error-color: #f73535;
+  --white-color: #f1f5f2;
 }

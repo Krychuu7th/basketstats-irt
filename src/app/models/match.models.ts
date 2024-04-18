@@ -1,5 +1,5 @@
-import { MatchAction, StatType } from "../enums/match.enums"
-import { StatBuilder } from "../utils/stat.builder"
+import { MatchAction, StatType } from "../enums/match.enums";
+import { StatBuilder } from "../utils/stat.builder";
 
 export type Team = {
     id?: number,
@@ -16,7 +16,7 @@ export type Player = {
 export type StandardMatch = {
     teamA: Team,
     teamB: Team
-}
+};
 
 export type ActionState = {
     actionStep: number,
@@ -25,25 +25,27 @@ export type ActionState = {
     shotValue: number
     isStatReady: boolean,
     action?: MatchAction,
-    actionMessage?: string | undefined
-}
+    actionMessage?: string | undefined,
+    needFreeThrowsSelection: number,
+    freeThrowsSet: number,
+};
 
 export type ShotSpec = {
     value: number,
     x: number,
     y: number
-}
+};
 
 export class Stat {
     type!: StatType;
     playerId?: number;
     teamId?: number;
-    relatedStat?: Stat;
+    relatedStats: Stat[] = [];
 
     constructor(builder: StatBuilder) {
         this.type = builder.type;
         this.playerId = builder.playerId;
         this.teamId = builder.teamId;
-        this.relatedStat = builder.relatedStat;
+        this.relatedStats = builder.relatedStats;
     }
-}
+};

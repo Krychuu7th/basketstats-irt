@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { ShootingAction } from '../../enums/match.enums';
 import { ShotSpec } from '../../models/match.models';
 import { DialOperations } from '../../operation-dial/operation-dial.models';
 import { roundDecimal } from '../../utils/number.utils';
+import { MatchProcessService } from '../match-process.service';
 import { CourtArea } from './court-panel.enums';
 
 @Component({
@@ -11,13 +13,54 @@ import { CourtArea } from './court-panel.enums';
 })
 export class CourtPanelComponent {
 
-  @Input({ required: true }) operations: DialOperations[] = [];
-  @Input() actionMessage: string | undefined;
-
   @Output() shotMade = new EventEmitter<ShotSpec>();
 
   clickedX: number | null = null;
   clickedY: number | null = null;
+  shotSpec: ShotSpec = { value: -1, x: -1, y: -1 };
+
+  operations: DialOperations[] = [
+    {
+      icon: 'pi-check',
+      operation: () => {
+        this.matchProcessService.initAction(ShootingAction.MADE, this.shotSpec.value);
+      },
+      tooltipMessage: 'Trafiony'
+    },
+    {
+      icon: 'pi-check-circle',
+      operation: () => {
+        this.matchProcessService.initAction(ShootingAction.MADE_WITH_FOUL, this.shotSpec.value);
+      },
+      tooltipMessage: 'Trafiony z faulem'
+    },
+    {
+      icon: 'pi-times',
+      operation: () => {
+        this.matchProcessService.initAction(ShootingAction.MISSED, this.shotSpec.value);
+      },
+      tooltipMessage: 'Nietrafiony'
+    },
+
+    {
+      icon: 'pi-times-circle',
+      operation: () => {
+        this.matchProcessService.initAction(ShootingAction.MISSED_WITH_FOUL, this.shotSpec.value);
+      },
+      tooltipMessage: 'Nietrafiony z faulem'
+    },
+    {
+      icon: 'pi-circle-fill',
+      operation: () => {
+        this.matchProcessService.initAction(ShootingAction.BLOCKED, this.shotSpec.value);
+      },
+      tooltipMessage: 'Zablokowany'
+    },
+  ];
+
+  constructor(
+    private matchProcessService: MatchProcessService
+  ) { }
 
   courtClicked(event: MouseEvent) {
     const courtPanel = document.getElementById(CourtArea.FULL_COURT);
@@ -34,9 +77,9 @@ export class CourtPanelComponent {
     this.clickedY = yPercantage;
     const shotSpec = { value: 0, x: this.clickedX, y: this.clickedY };
     if (targetId === CourtArea.LEFT_SIDE || targetId === CourtArea.RIGHT_SIDE) {
-      this.shotMade.emit({ ...shotSpec, value: 2 });
+      this.shotSpec = { ...shotSpec, value: 2 };
     } else if (targetId === CourtArea.FULL_COURT) {
-      this.shotMade.emit({ ...shotSpec, value: 3 });
+      this.shotSpec = { ...shotSpec, value: 3 };
     }
   }
 

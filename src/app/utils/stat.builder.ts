@@ -5,7 +5,7 @@ export class StatBuilder {
   type!: StatType;
   playerId?: number;
   teamId?: number;
-  relatedStat?: Stat;
+  relatedStats: Stat[] = [];
 
 
   setType(value: StatType): StatBuilder {
@@ -24,8 +24,8 @@ export class StatBuilder {
   }
 
 
-  setRelatedStat(value: Stat): StatBuilder {
-    this.relatedStat = value;
+  addRelatedStats(value: Stat[] | Stat): StatBuilder {
+    this.relatedStats = this.relatedStats.concat(Array.isArray(value) ? [...value] : value);
     return this;
   }
 

@@ -42,9 +42,7 @@
     [ngStyle]="{ 'left.%': clickedX, 'top.%': clickedY }"
     [operations]="operations"
   ></app-operation-dial>
-  <div *ngIf="actionMessage" class="stat-message">
-    <span>{{ actionMessage }}</span>
-  </div>
+  <app-action-control></app-action-control>
 </div>
 <!-- TEST -->
 <!-- <div>

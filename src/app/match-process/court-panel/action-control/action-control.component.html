@@ -1,0 +1,57 @@
+<div *ngIf="showControl" class="stat-message">
+  <span>{{ actionMessage }}</span>
+  <div class="free-throws-boxes">
+    @for (freeThrowMade of freeThrowsMade; track $index) {
+    <div
+      class="free-throw-box"
+      [ngClass]="{ made: freeThrowMade, missed: !freeThrowMade }"
+    ></div>
+    }
+    <div
+      class="free-throw-box empty"
+      *ngFor="let _ of [].constructor(freeThrowsNeeded - freeThrowsMade.length)"
+    ></div>
+  </div>
+  <div *ngIf="needToSelectFreeThrow" class="made-missed-selection">
+    <div>
+      <p-button
+        class="position-absolute"
+        icon="pi pi-check"
+        [rounded]="true"
+        severity="secondary"
+        pTooltip="Trafiony"
+        tooltipPosition="left"
+        (click)="madeFreeThrow(); $event.stopPropagation()"
+        (mousedown)="$event.stopPropagation()"
+        (mouseup)="$event.stopPropagation()"
+      ></p-button>
+    </div>
+    <div>
+      <p-button
+        class="position-absolute"
+        icon="pi pi-times"
+        [rounded]="true"
+        severity="secondary"
+        pTooltip="Nietrafiony"
+        tooltipPosition="right"
+        (click)="missedFreeThrow(); $event.stopPropagation()"
+        (mousedown)="$event.stopPropagation()"
+        (mouseup)="$event.stopPropagation()"
+      ></p-button>
+    </div>
+  </div>
+  <div class="cancel-wrapper">
+    <div>
+      <p-button
+        class="position-absolute"
+        icon="pi pi-times-circle"
+        [rounded]="true"
+        pTooltip="Anuluj akcję"
+        tooltipPosition="bottom"
+        (click)="cancelAction(); $event.stopPropagation()"
+        (mousedown)="$event.stopPropagation()"
+        (mouseup)="$event.stopPropagation()"
+      ></p-button>
+    </div>
+  </div>
+</div>

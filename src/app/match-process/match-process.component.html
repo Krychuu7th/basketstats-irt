@@ -37,32 +37,23 @@
   </div>
 </div>
 <div class="court-panel-box">
-  <app-on-court-players
-    [players]="teamAOnCourtPlayers"
-    [needPlayerSelection]="needPlayerSelection"
-    (selectedPlayer)="applyAction($event)"
-  ></app-on-court-players>
+  <app-on-court-players [players]="teamAOnCourtPlayers"></app-on-court-players>
 
-  <app-court-panel
-    [operations]="operations"
-    [actionMessage]="actionMessage"
-    (shotMade)="setShotSpec($event)"
-  ></app-court-panel>
+  <app-court-panel></app-court-panel>
 
   <app-on-court-players
     class="reverse"
     [players]="teamBOnCourtPlayers"
-    [needPlayerSelection]="needPlayerSelection"
-    (selectedPlayer)="applyAction($event)"
   ></app-on-court-players>
 </div>
 <!-- TEST -->
 <div>
   @for (stat of matchProcessService.$matchStats | async; track $index) {
   <div>
-    {{ stat.type }} | {{ getPlayerName(stat.playerId) }} ### relatedStat:
-    {{ stat.relatedStat?.type }} |
-    {{ getPlayerName(stat.relatedStat?.playerId) }}
+    {{ stat.type }} | {{ getPlayerName(stat.playerId) }} ### relatedStats: @for
+    (relatedStat of stat.relatedStats; track $index) { {{ relatedStat?.type }} |
+    {{ getPlayerName(relatedStat?.playerId) }}
+    }
   </div>
   }
 </div>
