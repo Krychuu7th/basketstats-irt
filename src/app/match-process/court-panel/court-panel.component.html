@@ -37,10 +37,11 @@
   ></i>
   <!--  -->
   <app-operation-dial
-    [hidden]="!clickedX || !clickedY"
-    class="position-absolute"
-    [ngStyle]="{ 'left.%': clickedX, 'top.%': clickedY }"
-    [operations]="operations"
+    [show]="!!clickedX && !!clickedY"
+    [xPosition]="clickedX!"
+    [yPosition]="clickedY!"
+    positionedBy="percentage"
+    [dialActions]="dialActions"
   ></app-operation-dial>
   <app-action-control></app-action-control>
 </div>

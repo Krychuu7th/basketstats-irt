@@ -1,17 +1,25 @@
-<div class="operations-box" id="operationsContainer">
-  <div class="operations-background"></div>
-  @for (operation of operations; let index = $index; track index) {
-  <div class="{{ operation.customClass }}">
-    <p-button
-      class="position-absolute"
-      [ngStyle]="{ 'left.px': buttonsX[index], 'top.px': buttonsY[index] }"
-      icon="pi {{ operation.icon }}"
-      [rounded]="true"
-      severity="secondary"
-      [pTooltip]="operation.tooltipMessage"
-      tooltipPosition="top"
-      (mouseup)="operation.operation()"
-    ></p-button>
+<div [hidden]="!show || exceededNumberOfButtons">
+  <div #actionsContainer class="actions-box" id="actionsContainer">
+    @for (action of dialActions; let index = $index; track index) {
+    <div class="button-wrapper">
+      <button
+        class="dial-button"
+        [ngStyle]="{
+          'left.px': buttonsX[index],
+          'top.px': buttonsY[index]
+        }"
+        [ngClass]="action.customClass"
+        (mouseup)="$event.stopPropagation(); action.action()"
+      >
+        <i class="pi" [ngClass]="action.icon"></i>
+      </button>
+    </div>
+    }
   </div>
-  }
+  <div
+    class="actions-background"
+    [ngClass]="{
+      'double-layer': dialActions.length > FIRST_LAYER_MAX_NUMBER_OF_BUTTONS
+    }"
+  ></div>
 </div>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ShootingAction } from '../../enums/match.enums';
 import { ShotSpec } from '../../models/match.models';
-import { DialOperations } from '../../operation-dial/operation-dial.models';
+import { DialActions } from '../../operation-dial/operation-dial.component';
 import { roundDecimal } from '../../utils/number.utils';
 import { MatchProcessService } from '../match-process.service';
 import { CourtArea } from './court-panel.enums';
@@ -19,50 +19,56 @@ export class CourtPanelComponent {
   clickedY: number | null = null;
   shotSpec: ShotSpec = { value: -1, x: -1, y: -1 };
 
-  operations: DialOperations[] = [
+  dialActions: DialActions[] = [
     {
       icon: 'pi-check',
-      operation: () => {
+      action: () => {
         this.matchProcessService.initAction(ShootingAction.MADE, this.shotSpec.value);
+        this.resetCourtSelection(null);
       },
-      tooltipMessage: 'Trafiony'
+      // tooltipMessage: 'Trafiony'
     },
     {
       icon: 'pi-check-circle',
-      operation: () => {
+      action: () => {
         this.matchProcessService.initAction(ShootingAction.MADE_WITH_FOUL, this.shotSpec.value);
+        this.resetCourtSelection(null);
       },
-      tooltipMessage: 'Trafiony z faulem'
+      // tooltipMessage: 'Trafiony z faulem'
     },
     {
       icon: 'pi-times',
-      operation: () => {
+      action: () => {
         this.matchProcessService.initAction(ShootingAction.MISSED, this.shotSpec.value);
+        this.resetCourtSelection(null);
       },
-      tooltipMessage: 'Nietrafiony'
+      // tooltipMessage: 'Nietrafiony'
     },
 
     {
       icon: 'pi-times-circle',
-      operation: () => {
+      action: () => {
         this.matchProcessService.initAction(ShootingAction.MISSED_WITH_FOUL, this.shotSpec.value);
+        this.resetCourtSelection(null);
       },
-      tooltipMessage: 'Nietrafiony z faulem'
+      // tooltipMessage: 'Nietrafiony z faulem'
     },
     {
       icon: 'pi-circle-fill',
-      operation: () => {
+      action: () => {
         this.matchProcessService.initAction(ShootingAction.BLOCKED, this.shotSpec.value);
+        this.resetCourtSelection(null);
       },
-      tooltipMessage: 'Zablokowany'
-    },
+      // tooltipMessage: 'Zablokowany'
+    }
   ];
 
   constructor(
-    private matchProcessService: MatchProcessService
+    private matchProcessService: MatchProcessService,
   ) { }
 
   courtClicked(event: MouseEvent) {
+    //TODO: move to dial service
     const courtPanel = document.getElementById(CourtArea.FULL_COURT);
     const courtWidth = courtPanel!.getBoundingClientRect().width;
     const courtHeight = courtPanel!.getBoundingClientRect().height;
