@@ -28,6 +28,8 @@ export type ActionState = {
     actionMessage?: string | undefined,
     needFreeThrowsSelection: number,
     freeThrowsSet: number,
+    canBeSkipped: boolean,
+    statToBeDeterminedByPlayerSelection?: StatType,
 };
 
 export type ShotSpec = {

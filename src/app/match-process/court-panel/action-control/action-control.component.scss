@@ -66,12 +66,19 @@ $control-backgroud: #ffffff50;
     }
   }
 
-  .cancel-wrapper {
-    height: 10px;
+  .button-wrapper {
     width: 100%;
     margin-top: 10px;
     display: flex;
     justify-content: center;
+
+    &.skip {
+      height: 50px;
+    }
+
+    &.cancel {
+      height: 10px;
+    }
 
     div {
       width: 48px;

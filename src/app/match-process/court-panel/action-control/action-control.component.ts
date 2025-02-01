@@ -10,6 +10,7 @@ import { MatchProcessService } from '../../match-process.service';
 export class ActionControlComponent implements OnInit {
 
   showControl = false;
+  showSkipButton = false;
   actionMessage: string | undefined;
   needToSelectFreeThrow = false;
   freeThrowsNeeded = 0;
@@ -19,9 +20,9 @@ export class ActionControlComponent implements OnInit {
 
   ngOnInit(): void {
     this.matchProcessService.$actionState.subscribe((state: ActionState | null) => {
-      console.log('ActionControlComponent', state);
       if (state) {
         this.showControl = !state.isStatReady;
+        this.showSkipButton = state.canBeSkipped;
         if (state.actionMessage) {
           this.actionMessage = state.actionMessage;
         }
@@ -53,5 +54,9 @@ export class ActionControlComponent implements OnInit {
 
   cancelAction(): void {
     this.matchProcessService.cancelAction();
+  }
+
+  skipActionStep(): void {
+    this.matchProcessService.nextActionStep();
   }
 }

@@ -1,9 +1,11 @@
 <div class="court-players-box">
   @for (player of players; let index = $index; track index) {
+  <!-- TODO: make whole container below, a separate component with canBeSelected() as input -->
   <div
     class="{{ index < 5 ? 'court-player' : 'court-player bench-player' }}"
     [ngClass]="{
-      selection: needPlayerSelection && !selectedPlayerId,
+      selection:
+        needPlayerSelection && !selectedPlayerId && canSelectPlayer(player),
       'selection-animation': player.id === selectedPlayerId
     }"
     (click)="selectPlayer($event, player)"

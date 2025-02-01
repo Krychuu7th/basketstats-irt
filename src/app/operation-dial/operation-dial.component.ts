@@ -62,7 +62,7 @@ export class OperationDialComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+    // console.log(changes)
   }
 
   private createButtons(numOfButtons: number): void {

@@ -40,12 +40,22 @@
       ></p-button>
     </div>
   </div>
-  <div class="cancel-wrapper">
+  <div class="button-wrapper skip" *ngIf="showSkipButton">
+    <p-button
+      class="position-absolute"
+      label="Pomiń"
+      (click)="skipActionStep(); $event.stopPropagation()"
+      (mousedown)="$event.stopPropagation()"
+      (mouseup)="$event.stopPropagation()"
+    ></p-button>
+  </div>
+  <div class="button-wrapper cancel">
     <div>
       <p-button
         class="position-absolute"
         icon="pi pi-times-circle"
         [rounded]="true"
+        severity="danger"
         pTooltip="Anuluj akcję"
         tooltipPosition="bottom"
         (click)="cancelAction(); $event.stopPropagation()"

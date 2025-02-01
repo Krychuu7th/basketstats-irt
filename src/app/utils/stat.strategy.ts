@@ -11,7 +11,8 @@ export abstract class StatStrategy {
         shotValue: 0,
         isStatReady: false,
         needFreeThrowsSelection: 0,
-        freeThrowsSet: 0
+        freeThrowsSet: 0,
+        canBeSkipped: false,
     };
 
     matchProcessService: MatchProcessService;
@@ -30,7 +31,6 @@ export abstract class StatStrategy {
 
     abstract nextStep(value?: any): void;
     protected abstract get actionMessages(): string[];
-
 }
 
 export abstract class ShotStrategy extends StatStrategy {
@@ -98,6 +98,46 @@ export class MadeShotStrategy extends InviolatedShotStrategy {
         this.state.action = ShootingAction.MADE;
         this.setStatType();
     }
+
+    override nextStep(value?: any): void {
+        switch (this.state.actionStep) {
+            case 1: {
+                this.setShooter(value);
+                break;
+            }
+            case 2: {
+                this.setAssist(value);
+                break;
+            }
+            default:
+                this.matchProcessService.actionMade(this.state);
+                break;
+        }
+    }
+
+    override get actionMessages(): string[] {
+        return ['Wybierz rzucającego', 'Wybierz asystującego'];
+    }
+
+    override setShooter(player: any): void {
+        if (player) {
+            this.state.statBuilder.setPlayerId(player.id).setTeamId(player.teamId);
+            this.state.actionStep = 2;
+            this.state.canBeSkipped = true;
+            this.state.statToBeDeterminedByPlayerSelection = StatType.AST;
+            this.setRelatedActionMessage();
+        }
+        this.matchProcessService.actionMade(this.state);
+    }
+
+    protected setAssist(player: any): void {
+        if (player) {
+            const relatedBlockBuilder = new StatBuilder();
+            relatedBlockBuilder.setType(StatType.AST).setPlayerId(player.id).setTeamId(player.teamId);
+            this.state.statBuilder.addRelatedStats(relatedBlockBuilder.build());
+        }
+        this.finishStat();
+    }
 }
 
 export class MissedShotStrategy extends InviolatedShotStrategy {
@@ -144,6 +184,7 @@ export abstract class ViolatedShotStrategy extends ShotStrategy {
         if (player) {
             this.state.statBuilder.setPlayerId(player.id).setTeamId(player.teamId);
             this.state.actionStep = 2;
+            this.setStatToBeDeterminedByPlayerSelection();
             this.setRelatedActionMessage();
         }
         this.matchProcessService.actionMade(this.state);
@@ -158,6 +199,10 @@ export abstract class ViolatedShotStrategy extends ShotStrategy {
         }
 
         this.matchProcessService.actionMade(this.state);
+    }
+
+    protected setStatToBeDeterminedByPlayerSelection(): void {
+        // NOT IMPLEMENTED
     }
 }
 
@@ -175,11 +220,14 @@ export class BlockedShotStrategy extends ViolatedShotStrategy {
         const relatedBlockBuilder = new StatBuilder();
         relatedBlockBuilder.setType(StatType.BLK).setPlayerId(player.id).setTeamId(player.teamId);
         this.state.statBuilder.addRelatedStats(relatedBlockBuilder.build());
-
     }
 
     override get actionMessages(): string[] {
         return ['Wybierz rzucającego', 'Wybierz blokującego'];
+    }
+
+    override setStatToBeDeterminedByPlayerSelection(): void {
+        this.state.statToBeDeterminedByPlayerSelection = StatType.BLK;
     }
 }
 
@@ -245,6 +293,10 @@ export class FouledShotStrategy extends ViolatedShotStrategy {
     override get actionMessages(): string[] {
         return ['Wybierz rzucającego', 'Wybierz faulującego', 'Rzuty wolne'];
     }
+
+    override setStatToBeDeterminedByPlayerSelection(): void {
+        this.state.statToBeDeterminedByPlayerSelection = StatType.PF;
+    }
 }
 
 export class FouledMadeShotStrategy extends FouledShotStrategy {
@@ -255,6 +307,73 @@ export class FouledMadeShotStrategy extends FouledShotStrategy {
         super(matchProcessService, shotValue);
         this.state.action = ShootingAction.MADE_WITH_FOUL;
         this.setStatType();
+    }
+
+    override nextStep(value?: any): void {
+        switch (this.state.actionStep) {
+            case 1: {
+                this.setShooter(value);
+                break;
+            }
+            case 2: {
+                this.setAssist(value);
+                break;
+            }
+            case 3: {
+                this.setViolation(value);
+                break;
+            }
+            case 4: {
+                this.setFreeThrows(value);
+                break;
+            }
+            default:
+                this.matchProcessService.actionMade(this.state);
+                break;
+        }
+    }
+
+    override setShooter(player: any): void {
+        if (player) {
+            this.state.statBuilder.setPlayerId(player.id).setTeamId(player.teamId);
+            this.state.actionStep = 2;
+            this.state.canBeSkipped = true;
+            this.state.statToBeDeterminedByPlayerSelection = StatType.AST;
+            this.setRelatedActionMessage();
+        }
+        this.matchProcessService.actionMade(this.state);
+    }
+
+    protected setAssist(player: any): void {
+        if (player) {
+            const relatedBlockBuilder = new StatBuilder();
+            relatedBlockBuilder.setType(StatType.AST).setPlayerId(player.id).setTeamId(player.teamId);
+            this.state.statBuilder.addRelatedStats(relatedBlockBuilder.build());
+        }
+
+        this.state.actionStep = 3;
+        this.state.needPlayerSelection = true;
+        this.state.canBeSkipped = false;
+        this.state.statToBeDeterminedByPlayerSelection = StatType.PF;
+        this.setRelatedActionMessage();
+
+        this.matchProcessService.actionMade(this.state);
+    }
+
+    override setViolation(value: any): void {
+        if (value) {
+            this.setRelatedStat(value);
+            this.state.needPlayerSelection = false;
+            this.state.needFreeThrowsSelection = this.getFreeThrowsQuantity();
+            this.state.actionStep = 4;
+            this.setRelatedActionMessage();
+        }
+
+        this.matchProcessService.actionMade(this.state);
+    }
+
+    override get actionMessages(): string[] {
+        return ['Wybierz rzucającego', 'Wybierz asystującego', 'Wybierz faulującego', 'Rzuty wolne'];
     }
 }
 
@@ -353,6 +472,7 @@ export class StealStrategy extends PlayerBasedStatStrategy {
         this.state.statBuilder.setType(StatType.STL).setPlayerId(this.player.id!).setTeamId(this.player.teamId!);
         this.state.actionStep = 1;
         this.state.needPlayerSelection = true;
+        this.state.statToBeDeterminedByPlayerSelection = StatType.TO;
         this.setRelatedActionMessage();
         this.matchProcessService.actionMade(this.state);
     }
