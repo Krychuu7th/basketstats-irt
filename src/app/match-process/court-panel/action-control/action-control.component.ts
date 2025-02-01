@@ -19,6 +19,7 @@ export class ActionControlComponent implements OnInit {
 
   ngOnInit(): void {
     this.matchProcessService.$actionState.subscribe((state: ActionState | null) => {
+      console.log('ActionControlComponent', state);
       if (state) {
         this.showControl = !state.isStatReady;
         if (state.actionMessage) {

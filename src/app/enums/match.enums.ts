@@ -6,10 +6,10 @@ export enum StatType {
     FTMISSED = 'FTMISSED',
     FTMADE = 'FTMADE',
     AST = 'AST',
-    OREB = 'OREB',
-    DREB = 'DREB',
     BLK = 'BLK',
     STL = 'STL',
+    DREB = 'DREB',
+    OREB = 'OREB',
     TO = 'TO',
     PF = 'PF',
 }
@@ -23,11 +23,11 @@ export enum ShootingAction {
 }
 
 export enum NonShootingAction {
-    // 'MADE' = 'MADE',
-    // 'MISSED' = 'MISSED',
-    // 'MADE_WITH_FOUL' = 'MADE_WITH_FOUL',
-    // 'MISSED_WITH_FOUL' = 'MISSED_WITH_FOUL',
-    // 'BLOCKED' = 'BLOCKED',
+    STL = 'STL',
+    DREB = 'DREB',
+    OREB = 'OREB',
+    TO = 'TO',
+    PF = 'PF'
 }
 
 export type MatchAction = ShootingAction | NonShootingAction;

@@ -66,6 +66,7 @@
 .court-panel-box {
   display: flex;
   justify-content: center;
+  justify-content: space-evenly;
 }
 
 @media screen and (max-width: 1400px) {

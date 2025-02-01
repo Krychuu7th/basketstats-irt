@@ -23,7 +23,7 @@ export class CourtPanelComponent {
     {
       icon: 'pi-check',
       action: () => {
-        this.matchProcessService.initAction(ShootingAction.MADE, this.shotSpec.value);
+        this.matchProcessService.initShotAction(ShootingAction.MADE, this.shotSpec.value);
         this.resetCourtSelection(null);
       },
       // tooltipMessage: 'Trafiony'
@@ -31,7 +31,7 @@ export class CourtPanelComponent {
     {
       icon: 'pi-check-circle',
       action: () => {
-        this.matchProcessService.initAction(ShootingAction.MADE_WITH_FOUL, this.shotSpec.value);
+        this.matchProcessService.initShotAction(ShootingAction.MADE_WITH_FOUL, this.shotSpec.value);
         this.resetCourtSelection(null);
       },
       // tooltipMessage: 'Trafiony z faulem'
@@ -39,7 +39,7 @@ export class CourtPanelComponent {
     {
       icon: 'pi-times',
       action: () => {
-        this.matchProcessService.initAction(ShootingAction.MISSED, this.shotSpec.value);
+        this.matchProcessService.initShotAction(ShootingAction.MISSED, this.shotSpec.value);
         this.resetCourtSelection(null);
       },
       // tooltipMessage: 'Nietrafiony'
@@ -48,7 +48,7 @@ export class CourtPanelComponent {
     {
       icon: 'pi-times-circle',
       action: () => {
-        this.matchProcessService.initAction(ShootingAction.MISSED_WITH_FOUL, this.shotSpec.value);
+        this.matchProcessService.initShotAction(ShootingAction.MISSED_WITH_FOUL, this.shotSpec.value);
         this.resetCourtSelection(null);
       },
       // tooltipMessage: 'Nietrafiony z faulem'
@@ -56,7 +56,7 @@ export class CourtPanelComponent {
     {
       icon: 'pi-circle-fill',
       action: () => {
-        this.matchProcessService.initAction(ShootingAction.BLOCKED, this.shotSpec.value);
+        this.matchProcessService.initShotAction(ShootingAction.BLOCKED, this.shotSpec.value);
         this.resetCourtSelection(null);
       },
       // tooltipMessage: 'Zablokowany'

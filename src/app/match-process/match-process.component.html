@@ -52,8 +52,7 @@
   <div>
     {{ stat.type }} | {{ getPlayerName(stat.playerId) }} ### relatedStats: @for
     (relatedStat of stat.relatedStats; track $index) { {{ relatedStat?.type }} |
-    {{ getPlayerName(relatedStat?.playerId) }}
-    }
+    {{ getPlayerName(relatedStat?.playerId) }}; }
   </div>
   }
 </div>

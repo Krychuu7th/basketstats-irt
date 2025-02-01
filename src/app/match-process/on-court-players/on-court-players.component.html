@@ -4,7 +4,7 @@
     class="{{ index < 5 ? 'court-player' : 'court-player bench-player' }}"
     [ngClass]="{
       selection: needPlayerSelection && !selectedPlayerId,
-      selected: player.id === selectedPlayerId
+      'selection-animation': player.id === selectedPlayerId
     }"
     (click)="selectPlayer($event, player)"
   >
@@ -27,6 +27,26 @@
           <div class="foul {{ index < 3 ? 'fill' : 'empty' }}"></div>
           }
         </div>
+      </div>
+      <div
+        class="player-stat-buttons"
+        [ngClass]="{ disabled: needPlayerSelection }"
+      >
+        @for (playerStatType of playerStatTypes; track $index) {
+        <button
+          class="round-button stat-button"
+          (click)="
+            addPlayerStat(player, playerStatType); $event.stopPropagation()
+          "
+        >
+          <p>
+            @switch (playerStatType) { @case (NonShootingAction.STL) { ST }
+            @case (NonShootingAction.OREB) { OR } @case (NonShootingAction.DREB)
+            { DR } @case (NonShootingAction.TO) { TO } @case
+            (NonShootingAction.PF) { PF } }
+          </p>
+        </button>
+        }
       </div>
       <!-- <app-operation-dial [operations]="operations"></app-operation-dial> -->
     </div>

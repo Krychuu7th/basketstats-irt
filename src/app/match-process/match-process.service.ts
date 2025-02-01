@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { MatchAction, ShootingAction } from '../enums/match.enums';
-import { ActionState, Stat } from '../models/match.models';
-import { BlockedShotStrategy, FouledMadeShotStrategy, FouledMissedShotStrategy, MadeShotStrategy, MissedShotStrategy, StatStrategy } from '../utils/stat.strategy';
+import { MatchAction, NonShootingAction, ShootingAction } from '../enums/match.enums';
+import { ActionState, Player, Stat } from '../models/match.models';
+import { BlockedShotStrategy, DefensiveReboundStrategy, FouledMadeShotStrategy, FouledMissedShotStrategy, MadeShotStrategy, MissedShotStrategy, OffensiveReboundStrategy, PersonalFoulStrategy, StatStrategy, StealStrategy, TurnoverStrategy } from '../utils/stat.strategy';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,7 @@ export class MatchProcessService {
     this.$actionState.next(state);
   }
 
-  public initAction(matchAction: MatchAction, shotValue: number): void {
+  public initShotAction(matchAction: MatchAction, shotValue: number): void {
     switch (matchAction) {
       case ShootingAction.MADE:
         this.statStrategy = new MadeShotStrategy(this, shotValue);
@@ -41,6 +41,28 @@ export class MatchProcessService {
         break;
       case ShootingAction.BLOCKED:
         this.statStrategy = new BlockedShotStrategy(this, shotValue);
+        break;
+    }
+
+    this.statStrategy?.nextStep();
+  }
+
+  public initPlayerBasedAction(matchAction: MatchAction, player: Player): void {
+    switch (matchAction) {
+      case NonShootingAction.STL:
+        this.statStrategy = new StealStrategy(this, player);
+        break;
+      case NonShootingAction.DREB:
+        this.statStrategy = new DefensiveReboundStrategy(this, player);
+        break;
+      case NonShootingAction.OREB:
+        this.statStrategy = new OffensiveReboundStrategy(this, player);
+        break;
+      case NonShootingAction.TO:
+        this.statStrategy = new TurnoverStrategy(this, player);
+        break;
+      case NonShootingAction.PF:
+        this.statStrategy = new PersonalFoulStrategy(this, player);
         break;
     }
 

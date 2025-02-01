@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
+import { MatchAction, NonShootingAction } from '../../enums/match.enums';
 import { ActionState, Player } from '../../models/match.models';
 import { MatchProcessService } from '../match-process.service';
 
@@ -15,8 +16,11 @@ export class OnCourtPlayersComponent implements OnInit {
 
   @ViewChildren(OverlayPanel) playerStatPanels!: QueryList<OverlayPanel>;
 
+  NonShootingAction = NonShootingAction;
+
   needPlayerSelection: boolean = false;
   selectedPlayerId: number | undefined;
+  playerStatTypes: NonShootingAction[] = [NonShootingAction.STL, NonShootingAction.DREB, NonShootingAction.OREB, NonShootingAction.TO, NonShootingAction.PF];
 
   constructor(
     private matchProcessService: MatchProcessService,
@@ -35,8 +39,13 @@ export class OnCourtPlayersComponent implements OnInit {
 
   selectPlayer(event: any, player: Player): void {
     if (this.needPlayerSelection) {
+      console.log('selectPlayer')
       this.selectedPlayerId = player?.id!;
       this.matchProcessService.nextActionStep(player);
     }
+  }
+
+  addPlayerStat(player: Player, statType: MatchAction): void {
+    this.matchProcessService.initPlayerBasedAction(statType, player);
   }
 }

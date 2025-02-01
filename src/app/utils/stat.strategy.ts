@@ -1,6 +1,6 @@
-import { ShootingAction, StatType } from "../enums/match.enums";
+import { NonShootingAction, ShootingAction, StatType } from "../enums/match.enums";
 import { MatchProcessService } from "../match-process/match-process.service";
-import { ActionState } from "../models/match.models";
+import { ActionState, Player } from "../models/match.models";
 import { StatBuilder } from "./stat.builder";
 
 export abstract class StatStrategy {
@@ -30,6 +30,7 @@ export abstract class StatStrategy {
 
     abstract nextStep(value?: any): void;
     protected abstract get actionMessages(): string[];
+
 }
 
 export abstract class ShotStrategy extends StatStrategy {
@@ -200,6 +201,7 @@ export class FouledShotStrategy extends ViolatedShotStrategy {
             }
             default:
                 this.matchProcessService.actionMade(this.state);
+                break;
         }
 
     }
@@ -256,7 +258,7 @@ export class FouledMadeShotStrategy extends FouledShotStrategy {
     }
 }
 
-export class FouledMissedShotStrategy extends FouledMadeShotStrategy {
+export class FouledMissedShotStrategy extends FouledShotStrategy {
     override twoPointStatType = StatType["2PMISSED"];
     override threePointStatType = StatType["3PMISSED"];
 
@@ -265,4 +267,104 @@ export class FouledMissedShotStrategy extends FouledMadeShotStrategy {
         this.state.action = ShootingAction.MISSED_WITH_FOUL;
         this.setStatType();
     }
+}
+
+export abstract class PlayerBasedStatStrategy extends StatStrategy {
+    protected player!: Player;
+
+    constructor(matchProcessService: MatchProcessService, player: Player) {
+        super(matchProcessService);
+        this.player = player;
+    }
+
+    override get actionMessages(): string[] {
+        throw [];
+    }
+
+    protected setPlayerBasedStat(statType: StatType) {
+        this.state.statBuilder.setType(statType).setPlayerId(this.player.id!).setTeamId(this.player.teamId!);
+    }
+}
+
+export class DefensiveReboundStrategy extends PlayerBasedStatStrategy {
+    override nextStep(value?: any): void {
+        this.state.action = NonShootingAction.DREB;
+        this.setPlayerBasedStat(StatType.DREB);
+        this.finishStat();
+    }
+}
+
+export class OffensiveReboundStrategy extends PlayerBasedStatStrategy {
+    override nextStep(value?: any): void {
+        this.state.action = NonShootingAction.OREB;
+        this.setPlayerBasedStat(StatType.OREB);
+        this.finishStat();
+    }
+
+}
+
+export class TurnoverStrategy extends PlayerBasedStatStrategy {
+    override nextStep(value?: any): void {
+        this.state.action = NonShootingAction.TO;
+        this.setPlayerBasedStat(StatType.TO);
+        this.finishStat();
+    }
+
+}
+
+export class PersonalFoulStrategy extends PlayerBasedStatStrategy {
+    override nextStep(value?: any): void {
+        this.state.action = NonShootingAction.PF;
+        this.setPlayerBasedStat(StatType.PF);
+        this.finishStat();
+    }
+
+}
+
+export class StealStrategy extends PlayerBasedStatStrategy {
+
+    constructor(matchProcessService: MatchProcessService, player: Player) {
+        super(matchProcessService, player);
+    }
+
+    override nextStep(value?: any): void {
+        console.log(this.state.actionStep)
+        switch (this.state.actionStep) {
+            case 0: {
+                this.setSteal();
+                break;
+            }
+            case 1: {
+                this.setTurnover(value);
+                break;
+            }
+            default:
+                this.matchProcessService.actionMade(this.state);
+                break;
+        }
+
+    }
+
+    override get actionMessages(): string[] {
+        return ['Przypisz stratę'];
+    }
+
+    setSteal(): void {
+        this.state.statBuilder.setType(StatType.STL).setPlayerId(this.player.id!).setTeamId(this.player.teamId!);
+        this.state.actionStep = 1;
+        this.state.needPlayerSelection = true;
+        this.setRelatedActionMessage();
+        this.matchProcessService.actionMade(this.state);
+    }
+
+    setTurnover(player: Player): void {
+        const relatedBlockBuilder = new StatBuilder();
+        relatedBlockBuilder.setType(StatType.TO).setPlayerId(player.id!).setTeamId(player.teamId!);
+        this.state.statBuilder.addRelatedStats(relatedBlockBuilder.build());
+        this.finishStat();
+    }
+
+    setRelatedActionMessage(): void {
+        this.state.actionMessage = this.actionMessages[this.state.actionStep - 1];
+    };
 }
